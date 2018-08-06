@@ -87,3 +87,28 @@ $.ajax({
 ```
 + get没有post安全 post相对安全
 > url劫持 信息泄露
+ ### > xhr.open([method],[url],[async],[user name],[password])各参数含义
+ - url：请求数据的地址
+ - ASYNC: 异步，不写默认为异步, false->同步
+ - 用户名和密码一般不用，如果请求的服务器设置了权限，需要提供（一般服务器允许匿名访问）
+ 
+ ### onreadystatechange
+ > ajax状态码： 描述当前ajax操作状态的
+ > readyState
+ - 0: unsend 未发送，只要创建一个ajax对象，默认值就是0
+ - 1: OPENED 已经执行了xhr.open操作
+ - 2: HEADERS_RECEIVED 当前ajax请求已经发送，并且已经接收到服务器返回的响应头信息
+ - 3: LOADING 响应主体内容正在返回的路上
+ - 4: DONE 响应主体内容已经返回
+ > HTTP网络状态码 记录了当前服务器的返回状态 xhr.status
+ - 200
+ - 301永久重定向 
+ - 302临时重定向 一般用于负载均衡(一般图片请求出现302，很多公司都有单独的图片服务器) 
+ - 304 not modified 从浏览器缓存中获取数据 不常更新的文件 提高页面加载速度，减轻服务器压力
+ - 4 开头一般都是失败，而且客户端的问题偏大
+ - 400 请求参数不存在
+ - 401 无权限
+ - 404 访问地址不存在
+ - 500 Internal server error 位置服务器错误
+ - 503 service unavailable 服务器超负载
+ 
