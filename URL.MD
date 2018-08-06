@@ -63,7 +63,7 @@ $.ajax({
 
 ```javascript
 $.ajax({
-    url:'getPersonInfo?id=12_12424',
+    url:'getPersonInfo?id=12&_12424',
     method:'get'
 })
 // url末尾加随机数 _=随机数
