@@ -5,12 +5,17 @@
 	let box = document.getElementById('box')
 	let serverTime = null
 	let fn = ()=>{
-		let nowTime = new Date()
-		// 获取的是客户端本机时间，会受到客户端自己设置的时间影响，
+		// nowTime = new Date()获取的是客户端本机时间，会受到客户端自己设置的时间影响，
 		// 重要的时间参考不能基于这个完成，
 		// 不管是哪一个客户都要基于相同的服务器时间进行计算
-		let	tarTime = new Date('2018/08/06 19:28 ')
-		let	spanTime = tarTime - nowTime
+	
+		/**
+		 *为避免重复请求服务器，需要把第一次获取的服务器时间每隔1s进行累加
+		 *getTime() 方法可返回距1970 年1 月1 日之间的毫秒数。
+		 * */
+		serverTime = serverTime + 1000
+		let	tarTime = new Date('2018/08/06 19:00 ').getTime()
+		let	spanTime = tarTime - serverTime
 		if(spanTime<0){
 			//	已经开抢了
 			box.innerHTML='开抢'
@@ -33,13 +38,14 @@
 		let xhr = new XMLHttpRequest()
 		xhr.onreadystatechange = ()=>{
 			// console.log(xhr.readyState)// head请求方式没有3，不需要等待响应主体
-			if(!/^(2|3)\d{3}$/.test(xhr.status)) return
+			if(!/^(2|3)\d{2}$/.test(xhr.status)) return
 			if(xhr.readyState===2){
-				serverTime = new Date(xhr.getResponseHeader('date'))
+				serverTime = (new Date(xhr.getResponseHeader('date'))).getTime()
 				fn()
 			}
 		}
-		xhr.open('head')
+		xhr.open('head','star.xml', true)
+		xhr.send(null)
 		/**
 		 * 获取服务器端时间会有延迟
 		 * 优化目的：减少时间差
@@ -51,5 +57,5 @@
 		 * 3. 在状态为2时把服务器时间获取到
 		 * */
 	}
-	
+	getServerTime()
 }()
