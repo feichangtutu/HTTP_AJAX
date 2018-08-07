@@ -5,7 +5,21 @@
     <title>Title</title>
 </head>
 <body>
-<script src="my_ajax.js"></script>
-<script src="my.js"></script>
+<script src="promise_ajax.js"></script>
+<script type="text/javascript">
+	pajax({
+		url:'./test.json',
+		method: 'get',
+        cache: false,
+        data:{
+			name:'jyn',
+            age:20
+        }
+	}).then((result)=>{
+		console.log(result)
+    },(err)=>{
+        console.log(err)
+    })
+</script>
 </body>
 </html>

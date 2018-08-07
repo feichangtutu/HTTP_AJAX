@@ -25,7 +25,7 @@
 				}
 			}
 			// deal cache, get才会处理cache
-			this.isGet ? this.cacheFn() : null
+			this.isGet ? this.dealCache() : null
 			// deal data
 			if(this.data !== null){
 				this.formatData()
@@ -37,7 +37,7 @@
 			xhr.open(this.method, this.url, this.async)
 			xhr.send(this.data)
 		}
-		cacheFn(){
+		dealCache(){
 			!this.cache ? this.url+= `${this.querySymbol()}_${Math.random()}`: null
 		}
 		querySymbol () {
