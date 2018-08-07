@@ -146,7 +146,6 @@ cache为false即不设置缓存，利用最简单的加 _***解决，***为随�
 
 ```javascript
     let result = xhr.responseText
-    // DATA TYPE 对服务器端返回的结果进行二次处理
     switch(this.dataType.toUpperCase()){
         case 'TEXT':
         case 'HTML':
